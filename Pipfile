@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+langchain = "*"
+load-dotenv = "*"
+openai = "*"
+flask = "*"
+fastapi = "*"
+uvicorn = "*"
+pygame = "*"
+jupyter = "*"
+huggingface-hub = "*"
+googlesearch-python = "*"
+google-search-results = "*"
+tweepy = "*"
+env = "*"
+pandas = "*"
+tabulate = "*"
+langchain-experimental = "*"
+wikipedia = "*"
+faiss-cpu = "*"
+tiktoken = "*"
+argilla = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
