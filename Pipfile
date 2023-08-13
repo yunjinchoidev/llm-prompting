@@ -24,6 +24,8 @@ wikipedia = "*"
 faiss-cpu = "*"
 tiktoken = "*"
 argilla = "*"
+pre-commit = "*"
+black = "*"
 
 [dev-packages]
 
