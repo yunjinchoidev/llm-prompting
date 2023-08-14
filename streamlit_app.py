@@ -6,9 +6,11 @@ url = st.text_input("URL을 입력하세요")
 summary_text = st.text_area("요약할 텍스트를 입력하세요")
 
 if url:
-    response = requests.get("http://localhost:8000/greet")
+    response = requests.get(
+        "http://localhost:8000/get-news-content/", params={"url": url}
+    )
     if response.status_code == 200:
-        st.write(response.json()["message"])
+        st.write(response.json()["content"])
     else:
         st.write("오류 발생:", response.status_code)
 

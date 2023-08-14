@@ -6,6 +6,10 @@ from langchain.chat_models import ChatOpenAI
 from langchain.tools.python.tool import PythonREPLTool
 from langchain import PromptTemplate, LLMChain
 from load_dotenv import load_dotenv
+from bs4 import BeautifulSoup
+import requests
+from fastapi import HTTPException
+import re
 
 load_dotenv()
 app = FastAPI()
@@ -60,6 +64,37 @@ def summarize(request: SummaryRequest) -> dict:
     summary = chain.run(information=information)
 
     return {"summary": summary}
+
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/98.0.4758.102"
+}
+
+
+def get_content_from_url(url: str) -> str:
+    try:
+        news = requests.get(url, headers=headers)
+        news_html = BeautifulSoup(news.text, "html.parser")
+        content = news_html.select_one("article#dic_area")
+        pattern1 = "<[^>]*>"
+        content_text = re.sub(pattern=pattern1, repl="", string=str(content))
+        return content_text.strip()
+    except Exception as e:
+        raise e
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/get-news-content/")
+def get_news_content(url: str):
+    try:
+        content = get_content_from_url(url)
+        return {"content": content}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 if __name__ == "__main__":
