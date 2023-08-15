@@ -35,6 +35,7 @@ sentence-transformers = "*"
 streamlit-chat = "*"
 watchdog = "*"
 spacy = "*"
+qrcode = "*"
 
 [dev-packages]
 
