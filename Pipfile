@@ -27,7 +27,8 @@ argilla = "*"
 pre-commit = "*"
 black = "*"
 streamlit = "*"
-pinecone-clinet = "*"
+pinecone-client = "*"
+pypdf = "*"
 
 [dev-packages]
 
