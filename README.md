@@ -11,4 +11,7 @@
 5. 요약한 정보를 하나의 document로 만들어서 다시 LLM을 이용해 종합 요약을 한다. 이 때, "시사점", "연결성", "미래 예측", "비판점" 등의 프롬프트를 통해 종합 해설 프롬프트를 하도록 한다.<br/>
 6. python tool agent 를 통해 워드클라우드, 연관 분석 그래프 를 작성하는 로직을 적용하고 이 이미지를 같이 보여준다. <br/>
 
-<img src="./utils/img/archi.png" width="292" height="800" align="center">
+
+<p align="center">
+  <img src="./utils/img/archi.png" alt="archi" width="400", height="1000"/>
+</p>
