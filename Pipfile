@@ -27,6 +27,7 @@ argilla = "*"
 pre-commit = "*"
 black = "*"
 streamlit = "*"
+pinecone-clinet = "*"
 
 [dev-packages]
 
