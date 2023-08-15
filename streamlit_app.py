@@ -2,37 +2,42 @@ import streamlit as st
 import requests
 
 import streamlit as st
+import requests
 
-st.title("뉴스 레포트 생성기")
+st.title("뉴스 레포트 생성기🧐")
+
+# URL을 노랗게 박스로 표시하고, 크기를 조절합니다.
+st.markdown(
+    "<div style='color: blue; font-size: 0.8em;'>예시 : https://n.news.naver.com/mnews/article/366/0000924337?sid=105</div>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    "<div style='color: blue; font-size: 0.8em;'>예시 : https://n.news.naver.com/mnews/article/014/0005057196?sid=105</div>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    "<div style='color: blue; font-size: 0.8em;'>예시 : https://n.news.naver.com/mnews/article/028/0002652384?sid=105</div>",
+    unsafe_allow_html=True,
+)
+
+# br
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
 
 # URL들을 저장할 리스트 초기화
 url_list = []
 
-# "URL 추가하기" 버튼이 클릭될 경우 동작
-if st.button("URL 추가하기"):
-    # Session state에 'count' 변수가 없으면 초기화
-    if "count" not in st.session_state:
-        st.session_state.count = 1
-    else:
-        st.session_state.count += 1
-
-# 'count'에 따라 동적으로 URL 입력 필드 추가
-for i in range(st.session_state.get("count", 0)):
+# 기본적으로 3개의 URL 입력 필드 제공
+for i in range(3):
     url = st.text_input(f"URL {i + 1}")
     if url:
         url_list.append(url)
 
-# 사용자가 입력한 URL들을 출력
-if url_list:
-    st.subheader("입력한 URL들:")
-    for url in url_list:
-        st.write(url)
-
-
-# summary_text = st.text_area("요약할 텍스트를 입력하세요")
-result = []
-
-if url_list:
+# "요약 보고서 작성하기" 버튼이 클릭될 경우 동작
+if st.button("요약 보고서 작성하기"):
+    result = []
     for url in url_list:
         response = requests.get(
             "http://localhost:8000/get-news-content/", params={"url": url}
@@ -42,12 +47,7 @@ if url_list:
         else:
             st.write("오류 발생:", response.status_code)
 
-    # st.write(result)
-
-
-if result:
     summary_result = []
-
     for summary_text in result:
         response = requests.post(
             "http://localhost:8000/summarize/", json={"information": summary_text}
@@ -57,10 +57,6 @@ if result:
         else:
             st.write("오류 발생:", response.status_code)
 
-    st.write(summary_result)
-
-
-# https://n.news.naver.com/mnews/article/469/0000755067?sid=105
-# https://n.news.naver.com/mnews/article/366/0000924378
-# https://n.news.naver.com/mnews/article/366/0000924415
-# https://n.news.naver.com/mnews/article/055/0001081473
+    for idx, summary in enumerate(summary_result):
+        st.subheader(f"URL {idx + 1} 요약:")
+        st.write(summary)
