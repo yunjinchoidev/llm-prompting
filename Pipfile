@@ -33,6 +33,7 @@ pypdf2 = "*"
 instructorembedding = "*"
 sentence-transformers = "*"
 streamlit-chat = "*"
+watchdog = "*"
 
 [dev-packages]
 
