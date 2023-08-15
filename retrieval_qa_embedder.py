@@ -10,7 +10,8 @@ from langchain.chains import RetrievalQA
 
 load_dotenv()
 pinecone.init(
-    api_key=os.environ["PINECONE_API_KEY"], environment="asia-southeast1-gcp-free"
+    api_key=os.environ["PINECONE_API_KEY"],
+    environment=os.environ["PINECONE_ENVIRONMENT_REGION"],
 )
 
 if __name__ == "__main__":
