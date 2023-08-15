@@ -2,8 +2,12 @@ from dotenv import load_dotenv
 from langchain.agents import AgentType
 from langchain.agents.agent_toolkits import create_python_agent
 from langchain.chat_models import ChatOpenAI
+from langchain.output_parsers import PydanticOutputParser
 from langchain.tools.python.tool import PythonREPLTool
 from langchain import PromptTemplate, LLMChain
+from langchain.output_parsers import PydanticOutputParser
+from pydantic import BaseModel, Field, validator
+from typing import List
 
 load_dotenv()
 
@@ -18,15 +22,33 @@ AI 스타트업 업스테이지는 고성능 한국어 AI 언어모델을 개발
 """
 
 
+# Define your desired data structure.
+class CustomResponseOfNews(BaseModel):
+    title: str = Field(description="title of news")
+    summary: str = Field(description="summary of news")
+
+    # You can add custom validation logic easily with Pydantic.
+    @validator("title")
+    def question_ends_with_question_mark(cls, field):
+        if field[-1] != "?":
+            raise ValueError("Badly formed question!")
+        return field
+
+
+parser = PydanticOutputParser(pydantic_object=CustomResponseOfNews)
+
+
 def main():
     summay_template = """
         뉴스 정보를 주겠다. {information}
         뉴스를 요약하세요.
+        \n{format_instructions}
     """
 
     summary_prompt_template = PromptTemplate(
         input_variables=["information"],
         template=summay_template,
+        partial_variables={"format_instructions": parser.get_format_instructions()},
     )
 
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k-0613")
