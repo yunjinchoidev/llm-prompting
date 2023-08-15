@@ -13,5 +13,5 @@
 
 
 <p align="center">
-  <img src="./utils/img/archi.png" alt="archi" width="400", height="1000"/>
+  <img src="./utils/img/archi.png" alt="archi" width="200", height="800"/>
 </p>
