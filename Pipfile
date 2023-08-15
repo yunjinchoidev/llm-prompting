@@ -29,6 +29,10 @@ black = "*"
 streamlit = "*"
 pinecone-client = "*"
 pypdf = "*"
+pypdf2 = "*"
+instructorembedding = "*"
+sentence-transformers = "*"
+streamlit-chat = "*"
 
 [dev-packages]
 
