@@ -18,5 +18,5 @@
 매일 뉴스를 요약하여 랭체인 에이전트를 통해 제공합니다. <br/>
 
 <p align="center">
-  <img src="./utils/img/archi.png" alt="archi" width="400"/>
+  <img src="./utils/img/archi.png" alt="archi" width="400", height="500"/>
 </p>
