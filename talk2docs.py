@@ -21,7 +21,10 @@ def run_llm(query: str) -> Any:
     docsearch = Pinecone.from_existing_index(index_name="news", embedding=embbings)
     chat = ChatOpenAI(verbose=True, temperature=0)
     qa = RetrievalQA.from_chain_type(
-        llm=chat, chain_type="stuff", retriever=docsearch.as_retriever()
+        llm=chat,
+        chain_type="stuff",
+        retriever=docsearch.as_retriever(),
+        return_source_documents=True,
     )
 
     return qa({"query": query})
