@@ -36,6 +36,7 @@ streamlit-chat = "*"
 watchdog = "*"
 spacy = "*"
 qrcode = "*"
+wordcloud = "*"
 
 [dev-packages]
 
