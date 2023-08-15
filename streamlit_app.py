@@ -3,7 +3,7 @@ import requests
 
 import streamlit as st
 
-st.title("Dynamic URL Input Tool")
+st.title("뉴스 레포트 생성기")
 
 # URL들을 저장할 리스트 초기화
 url_list = []
