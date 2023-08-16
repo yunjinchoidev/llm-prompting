@@ -28,3 +28,18 @@ SERPAPI_API_KEY=
 PINECONE_API_KEY=
 PINECONE_ENVIRONMENT_REGION=
 ```
+
+
+
+## 실행 방법
+
+- 현재 3번 까지 구현
+- `cp .env.template .env` 로 환경변수 설정 (OPENAI_API_KEY 만 필요)
+- `pipenv shell` 로 가상환경 설치 후 `pipenv install` 로 의존성 설치
+- `python fastapi_server.py` 로 요약 서버 실행
+- `streamlit run streamlit_app.py` 로 스트림릿 앱 실행
+- url 입력 후 요약 결과 확인
+
+
+
+[demonstration.mov](utils%2Fvideo%2Fdemonstration.mov)
