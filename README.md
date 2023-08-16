@@ -15,3 +15,16 @@
 <p align="center">
   <img src="./utils/img/archi.png" alt="archi" width="200", height="800"/>
 </p>
+
+
+
+## env setting
+
+```
+OPENAI_API_KEY=
+PROXYCURL_API_KEY=
+HUGGINGFACEHUB_API_TOKEN=
+SERPAPI_API_KEY=
+PINECONE_API_KEY=
+PINECONE_ENVIRONMENT_REGION=
+```
