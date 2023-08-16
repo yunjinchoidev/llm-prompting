@@ -4,6 +4,28 @@ import requests
 import streamlit as st
 import requests
 
+# Custom CSS for styling
+st.markdown(
+    """
+<style>
+    .reportview-container {
+        background-color: #f4f4f4;
+    }
+
+    h2 {
+        color: blue;
+        text-align: center;
+    }
+    .stTextInput > div > div > input {
+        padding: 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 st.title("뉴스 레포트 생성기🧐")
 
 # URL을 노랗게 박스로 표시하고, 크기를 조절합니다.
@@ -60,3 +82,13 @@ if st.button("요약 보고서 작성하기"):
     for idx, summary in enumerate(summary_result):
         st.subheader(f"URL {idx + 1} 요약:")
         st.write(summary)
+
+    st.title("종합 요약")
+    summary_result_text = " ".join(summary_result)
+    response = requests.post(
+        "http://localhost:8000/summarize/", json={"information": summary_result_text}
+    )
+    if response.status_code == 200:
+        st.write(response.json()["summary"])
+    else:
+        st.write("오류 발생:", response.status_code)
