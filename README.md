@@ -42,4 +42,8 @@ PINECONE_ENVIRONMENT_REGION=
 
 
 
+https://github.com/yunjinchoidev/llm-prompting/assets/89494907/d9256c14-641c-4e23-8c00-0b341533d672
+
+
+
 [demonstration.mov](utils%2Fvideo%2Fdemonstration.mov)
