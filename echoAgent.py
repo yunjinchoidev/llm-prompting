@@ -43,7 +43,10 @@ st.markdown(
 page = st.sidebar.selectbox("페이지 선택", ("홈", "프로필", "설정"))
 
 
-st.title("EchoAgent")
+# 챗봇 모드 변경
+chatbot_mode = st.sidebar.selectbox("챗봇 모드 선택", ("일반 모드", "고급 모드", "친구 모드", "박사님 모드"))
+
+st.title("EchoAgent" + " [" + chatbot_mode + "]")
 st.header("데일리 네이버 뉴스 요약 봇")
 
 
