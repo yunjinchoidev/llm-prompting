@@ -39,6 +39,10 @@ st.markdown(
 # Centered and resized logo
 # st.image("./utils/img/logo.png", width=100)
 
+
+page = st.sidebar.selectbox("페이지 선택", ("홈", "프로필", "설정"))
+
+
 st.title("EchoAgent")
 st.header("데일리 네이버 뉴스 요약 봇")
 
