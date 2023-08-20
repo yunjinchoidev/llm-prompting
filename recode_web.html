@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음성 녹음 및 변환</title>
+</head>
+<body>
+    <button id="record">녹음 시작</button>
+    <p id="text"></p>
+
+    <script>
+        var recordButton = document.getElementById('record');
+        var textElement = document.getElementById('text');
+
+        recordButton.addEventListener('click', function() {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "ko-KR";
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript;
+                textElement.textContent = transcript;
+                // 여기에서 transcript를 사용하여 필요한 처리 수행
+            };
+
+            recognition.start();
+        });
+    </script>
+</body>
+</html>
