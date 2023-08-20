@@ -41,6 +41,9 @@ steamship = "*"
 pyautogui = "*"
 xlwings = "*"
 pywinauto = "*"
+install = "*"
+pytube = "*"
+moviepy = "*"
 
 [dev-packages]
 
