@@ -1,32 +1,13 @@
 {
-  "manifest_version": 3,
-  "name": "Chatbot Extension",
+  "manifest_version": 2,
+  "name": "챗봇 익스텐션",
   "version": "1.0",
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "css": [
-        "style.css"
-      ],
-      "js": [
-        "content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
     }
   ],
-  "permissions": [
-    "activeTab"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "chatbot_icon.png",
-      "48": "chatbot_icon.png",
-      "128": "chatbot_icon.png"
-    }
-  }
+  "permissions": ["activeTab"]
 }
