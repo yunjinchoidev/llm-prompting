@@ -2,6 +2,14 @@ import streamlit as st
 from typing import Set
 from streamlit_chat import message
 from talk2docs import run_llm
+from load_dotenv import load_dotenv
+from PIL import Image
+from io import BytesIO
+import requests
+
+load_dotenv()
+
+from img_generation.dalle2_chat import generate_img
 
 # Custom CSS for styling
 st.markdown(
@@ -31,7 +39,14 @@ st.markdown(
 # Centered and resized logo
 # st.image("./utils/img/logo.png", width=100)
 
-st.title("EchoAgent")
+
+page = st.sidebar.selectbox("페이지 선택", ("홈", "프로필", "설정"))
+
+
+# 챗봇 모드 변경
+chatbot_mode = st.sidebar.selectbox("챗봇 모드 선택", ("일반 모드", "고급 모드", "친구 모드", "박사님 모드"))
+
+st.title("EchoAgent" + " [" + chatbot_mode + "]")
 st.header("데일리 네이버 뉴스 요약 봇")
 
 
@@ -59,21 +74,33 @@ def create_sources_string(source_urls: Set[str]) -> str:
 
 
 if prompt:
-    with st.spinner("Generating response.."):
-        generated_response = run_llm(
-            query=prompt, chat_history=st.session_state["chat_history"]
-        )
-        sources = set(
-            [doc.metadata["source"] for doc in generated_response["source_documents"]]
-        )
+    # 특정 명령어를 포착 (예: "이미지 생성:")
+    if prompt.endswith("그려줘"):
+        image_prompt = prompt[:-3].strip()  # 마지막 "~ 그려줘" 부분을 제외한 텍스트를 이미지 프롬프트로 사용
+        image_url = generate_img(image_prompt)
+        st.image(image_url, caption=image_prompt)
 
-        formatted_response = (
-            f"{generated_response['answer']} \n\n {create_sources_string(sources)}"
-        )
+    else:
+        with st.spinner("Generating response.."):
+            generated_response = run_llm(
+                query=prompt, chat_history=st.session_state["chat_history"]
+            )
+            sources = set(
+                [
+                    doc.metadata["source"]
+                    for doc in generated_response["source_documents"]
+                ]
+            )
 
-        st.session_state["user_prompt_history"].append(prompt)
-        st.session_state["chat_answers_history"].append(formatted_response)
-        st.session_state["chat_history"].append((prompt, generated_response["answer"]))
+            formatted_response = (
+                f"{generated_response['answer']} \n\n {create_sources_string(sources)}"
+            )
+
+            st.session_state["user_prompt_history"].append(prompt)
+            st.session_state["chat_answers_history"].append(formatted_response)
+            st.session_state["chat_history"].append(
+                (prompt, generated_response["answer"])
+            )
 
 
 if st.session_state["chat_answers_history"]:

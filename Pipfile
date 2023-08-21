@@ -37,6 +37,14 @@ watchdog = "*"
 spacy = "*"
 qrcode = "*"
 wordcloud = "*"
+steamship = "*"
+pyautogui = "*"
+xlwings = "*"
+pywinauto = "*"
+install = "*"
+pytube = "*"
+moviepy = "*"
+gtts = "*"
 
 [dev-packages]
 
